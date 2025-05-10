@@ -1,0 +1,329 @@
+Parsed Input:
+n=5, m=7, x_cap=3, y_cap=4
+Grid:
+1 1 1 1 1 1 0
+1 0 4 4 4 1 0
+1 0 4 20 4 1 0
+1 1 4 4 4 1 0
+1 1 1 1 1 1 0
+Graph and Capacities:
+Node 0: [1, 70, 3, 15]
+Node 1: [0, 14, 2]
+Node 2: [1, 3, 70, 5]
+Node 3: [2, 0, 4]
+Node 4: [3, 5, 70, 7, 19]
+Node 5: [4, 18, 2, 6]
+Node 6: [5, 7, 70, 9, 21]
+Node 7: [6, 20, 4, 8]
+Node 8: [7, 9, 70, 11, 23]
+Node 9: [8, 22, 6, 10]
+Node 10: [9, 11, 70, 25]
+Node 11: [10, 24, 8]
+Node 14: [1, 15, 70, 29]
+Node 15: [14, 0, 28]
+Node 18: [5, 19, 21, 33]
+Node 19: [18, 4, 32, 20]
+Node 20: [7, 19, 21, 23, 35]
+Node 21: [20, 6, 34, 18, 22]
+Node 22: [9, 21, 23, 25, 37]
+Node 23: [22, 8, 36, 20, 24]
+Node 24: [11, 23, 25, 39]
+Node 25: [24, 10, 38, 22]
+Node 28: [15, 29, 70, 43]
+Node 29: [28, 14, 42]
+Node 32: [19, 33, 35, 47]
+Node 33: [32, 18, 46, 34]
+Node 34: [21, 33, 35, 37, 49]
+Node 35: [34, 20, 48, 32, 36]
+Node 36: [23, 35, 37, 39, 51]
+Node 37: [36, 22, 50, 34, 38]
+Node 38: [25, 37, 39, 53]
+Node 39: [38, 24, 52, 36]
+Node 42: [29, 43, 70, 45, 57]
+Node 43: [42, 28, 56, 44]
+Node 44: [43, 45, 47, 59]
+Node 45: [44, 58, 42, 46]
+Node 46: [33, 45, 47, 49, 61]
+Node 47: [46, 32, 60, 44, 48]
+Node 48: [35, 47, 49, 51, 63]
+Node 49: [48, 34, 62, 46, 50]
+Node 50: [37, 49, 53, 65]
+Node 51: [36, 64, 48, 52]
+Node 52: [39, 51, 53, 67]
+Node 53: [52, 38, 66, 50]
+Node 56: [43, 57, 70, 59]
+Node 57: [56, 42, 58]
+Node 58: [45, 57, 59, 70, 61]
+Node 59: [58, 44, 56, 60]
+Node 60: [47, 59, 61, 70, 63]
+Node 61: [60, 46, 58, 62]
+Node 62: [49, 61, 63, 70, 65]
+Node 63: [62, 48, 60, 64]
+Node 64: [51, 63, 65, 70, 67]
+Node 65: [64, 50, 62, 66]
+Node 66: [53, 65, 67, 70]
+Node 67: [66, 52, 64]
+Node 70: [0, 2, 4, 6, 8, 10, 14, 28, 42, 56, 58, 60, 62, 64, 66]
+Capacities:
+Capacity from 0 to 1: 1
+Capacity from 1 to 0: 0
+Capacity from 1 to 14: inf
+Capacity from 14 to 1: 0
+Capacity from 1 to 2: inf
+Capacity from 2 to 1: 0
+Capacity from 70 to 0: inf
+Capacity from 0 to 70: 0
+Capacity from 2 to 3: 1
+Capacity from 3 to 2: 0
+Capacity from 3 to 0: inf
+Capacity from 0 to 3: 0
+Capacity from 3 to 4: inf
+Capacity from 4 to 3: 0
+Capacity from 70 to 2: inf
+Capacity from 2 to 70: 0
+Capacity from 4 to 5: 1
+Capacity from 5 to 4: 0
+Capacity from 5 to 18: inf
+Capacity from 18 to 5: 0
+Capacity from 5 to 2: inf
+Capacity from 2 to 5: 0
+Capacity from 5 to 6: inf
+Capacity from 6 to 5: 0
+Capacity from 70 to 4: inf
+Capacity from 4 to 70: 0
+Capacity from 6 to 7: 1
+Capacity from 7 to 6: 0
+Capacity from 7 to 20: inf
+Capacity from 20 to 7: 0
+Capacity from 7 to 4: inf
+Capacity from 4 to 7: 0
+Capacity from 7 to 8: inf
+Capacity from 8 to 7: 0
+Capacity from 70 to 6: inf
+Capacity from 6 to 70: 0
+Capacity from 8 to 9: 1
+Capacity from 9 to 8: 0
+Capacity from 9 to 22: inf
+Capacity from 22 to 9: 0
+Capacity from 9 to 6: inf
+Capacity from 6 to 9: 0
+Capacity from 9 to 10: inf
+Capacity from 10 to 9: 0
+Capacity from 70 to 8: inf
+Capacity from 8 to 70: 0
+Capacity from 10 to 11: 1
+Capacity from 11 to 10: 0
+Capacity from 11 to 24: inf
+Capacity from 24 to 11: 0
+Capacity from 11 to 8: inf
+Capacity from 8 to 11: 0
+Capacity from 70 to 10: inf
+Capacity from 10 to 70: 0
+Capacity from 14 to 15: 1
+Capacity from 15 to 14: 0
+Capacity from 15 to 0: inf
+Capacity from 0 to 15: 0
+Capacity from 15 to 28: inf
+Capacity from 28 to 15: 0
+Capacity from 70 to 14: inf
+Capacity from 14 to 70: 0
+Capacity from 18 to 19: 4
+Capacity from 19 to 18: 0
+Capacity from 19 to 4: inf
+Capacity from 4 to 19: 0
+Capacity from 19 to 32: inf
+Capacity from 32 to 19: 0
+Capacity from 19 to 20: inf
+Capacity from 20 to 19: 0
+Capacity from 20 to 21: 4
+Capacity from 21 to 20: 0
+Capacity from 21 to 6: inf
+Capacity from 6 to 21: 0
+Capacity from 21 to 34: inf
+Capacity from 34 to 21: 0
+Capacity from 21 to 18: inf
+Capacity from 18 to 21: 0
+Capacity from 21 to 22: inf
+Capacity from 22 to 21: 0
+Capacity from 22 to 23: 4
+Capacity from 23 to 22: 0
+Capacity from 23 to 8: inf
+Capacity from 8 to 23: 0
+Capacity from 23 to 36: inf
+Capacity from 36 to 23: 0
+Capacity from 23 to 20: inf
+Capacity from 20 to 23: 0
+Capacity from 23 to 24: inf
+Capacity from 24 to 23: 0
+Capacity from 24 to 25: 1
+Capacity from 25 to 24: 0
+Capacity from 25 to 10: inf
+Capacity from 10 to 25: 0
+Capacity from 25 to 38: inf
+Capacity from 38 to 25: 0
+Capacity from 25 to 22: inf
+Capacity from 22 to 25: 0
+Capacity from 28 to 29: 1
+Capacity from 29 to 28: 0
+Capacity from 29 to 14: inf
+Capacity from 14 to 29: 0
+Capacity from 29 to 42: inf
+Capacity from 42 to 29: 0
+Capacity from 70 to 28: inf
+Capacity from 28 to 70: 0
+Capacity from 32 to 33: 4
+Capacity from 33 to 32: 0
+Capacity from 33 to 18: inf
+Capacity from 18 to 33: 0
+Capacity from 33 to 46: inf
+Capacity from 46 to 33: 0
+Capacity from 33 to 34: inf
+Capacity from 34 to 33: 0
+Capacity from 34 to 35: 20
+Capacity from 35 to 34: 0
+Capacity from 35 to 20: inf
+Capacity from 20 to 35: 0
+Capacity from 35 to 48: inf
+Capacity from 48 to 35: 0
+Capacity from 35 to 32: inf
+Capacity from 32 to 35: 0
+Capacity from 35 to 36: inf
+Capacity from 36 to 35: 0
+Capacity from 36 to 37: 4
+Capacity from 37 to 36: 0
+Capacity from 37 to 22: inf
+Capacity from 22 to 37: 0
+Capacity from 37 to 50: inf
+Capacity from 50 to 37: 0
+Capacity from 37 to 34: inf
+Capacity from 34 to 37: 0
+Capacity from 37 to 38: inf
+Capacity from 38 to 37: 0
+Capacity from 38 to 39: 1
+Capacity from 39 to 38: 0
+Capacity from 39 to 24: inf
+Capacity from 24 to 39: 0
+Capacity from 39 to 52: inf
+Capacity from 52 to 39: 0
+Capacity from 39 to 36: inf
+Capacity from 36 to 39: 0
+Capacity from 42 to 43: 1
+Capacity from 43 to 42: 0
+Capacity from 43 to 28: inf
+Capacity from 28 to 43: 0
+Capacity from 43 to 56: inf
+Capacity from 56 to 43: 0
+Capacity from 43 to 44: inf
+Capacity from 44 to 43: 0
+Capacity from 70 to 42: inf
+Capacity from 42 to 70: 0
+Capacity from 44 to 45: 1
+Capacity from 45 to 44: 0
+Capacity from 45 to 58: inf
+Capacity from 58 to 45: 0
+Capacity from 45 to 42: inf
+Capacity from 42 to 45: 0
+Capacity from 45 to 46: inf
+Capacity from 46 to 45: 0
+Capacity from 46 to 47: 4
+Capacity from 47 to 46: 0
+Capacity from 47 to 32: inf
+Capacity from 32 to 47: 0
+Capacity from 47 to 60: inf
+Capacity from 60 to 47: 0
+Capacity from 47 to 44: inf
+Capacity from 44 to 47: 0
+Capacity from 47 to 48: inf
+Capacity from 48 to 47: 0
+Capacity from 48 to 49: 4
+Capacity from 49 to 48: 0
+Capacity from 49 to 34: inf
+Capacity from 34 to 49: 0
+Capacity from 49 to 62: inf
+Capacity from 62 to 49: 0
+Capacity from 49 to 46: inf
+Capacity from 46 to 49: 0
+Capacity from 49 to 50: inf
+Capacity from 50 to 49: 0
+Capacity from 51 to 36: inf
+Capacity from 36 to 51: 0
+Capacity from 51 to 64: inf
+Capacity from 64 to 51: 0
+Capacity from 51 to 48: inf
+Capacity from 48 to 51: 0
+Capacity from 51 to 52: inf
+Capacity from 52 to 51: 0
+Capacity from 52 to 53: 1
+Capacity from 53 to 52: 0
+Capacity from 53 to 38: inf
+Capacity from 38 to 53: 0
+Capacity from 53 to 66: inf
+Capacity from 66 to 53: 0
+Capacity from 53 to 50: inf
+Capacity from 50 to 53: 0
+Capacity from 56 to 57: 1
+Capacity from 57 to 56: 0
+Capacity from 57 to 42: inf
+Capacity from 42 to 57: 0
+Capacity from 57 to 58: inf
+Capacity from 58 to 57: 0
+Capacity from 70 to 56: inf
+Capacity from 56 to 70: 0
+Capacity from 58 to 59: 1
+Capacity from 59 to 58: 0
+Capacity from 59 to 44: inf
+Capacity from 44 to 59: 0
+Capacity from 59 to 56: inf
+Capacity from 56 to 59: 0
+Capacity from 59 to 60: inf
+Capacity from 60 to 59: 0
+Capacity from 70 to 58: inf
+Capacity from 58 to 70: 0
+Capacity from 60 to 61: 1
+Capacity from 61 to 60: 0
+Capacity from 61 to 46: inf
+Capacity from 46 to 61: 0
+Capacity from 61 to 58: inf
+Capacity from 58 to 61: 0
+Capacity from 61 to 62: inf
+Capacity from 62 to 61: 0
+Capacity from 70 to 60: inf
+Capacity from 60 to 70: 0
+Capacity from 62 to 63: 1
+Capacity from 63 to 62: 0
+Capacity from 63 to 48: inf
+Capacity from 48 to 63: 0
+Capacity from 63 to 60: inf
+Capacity from 60 to 63: 0
+Capacity from 63 to 64: inf
+Capacity from 64 to 63: 0
+Capacity from 70 to 62: inf
+Capacity from 62 to 70: 0
+Capacity from 64 to 65: 1
+Capacity from 65 to 64: 0
+Capacity from 65 to 50: inf
+Capacity from 50 to 65: 0
+Capacity from 65 to 62: inf
+Capacity from 62 to 65: 0
+Capacity from 65 to 66: inf
+Capacity from 66 to 65: 0
+Capacity from 70 to 64: inf
+Capacity from 64 to 70: 0
+Capacity from 66 to 67: 1
+Capacity from 67 to 66: 0
+Capacity from 67 to 52: inf
+Capacity from 52 to 67: 0
+Capacity from 67 to 64: inf
+Capacity from 64 to 67: 0
+Capacity from 70 to 66: inf
+Capacity from 66 to 70: 0
+Path flow added: 1, Current max flow: 1
+Path flow added: 1, Current max flow: 2
+Path flow added: 1, Current max flow: 3
+Path flow added: 1, Current max flow: 4
+Path flow added: 1, Current max flow: 5
+Path flow added: 1, Current max flow: 6
+Path flow added: 1, Current max flow: 7
+Path flow added: 1, Current max flow: 8
+Path flow added: 1, Current max flow: 9
+Final Max Flow: 9

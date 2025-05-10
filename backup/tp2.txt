@@ -1,0 +1,100 @@
+O documento é a especificação do Trabalho Prático 02 (TP2) da disciplina Algoritmos I, com entrega prevista para 2025. Ele descreve um problema computacional a ser resolvido, envolvendo a defesa de uma capital em um reino fictício, utilizando grafos e algoritmos eficientes. Abaixo está uma explicação detalhada do conteúdo:
+
+---
+
+### **1. Introdução**
+- **Contexto**: Um rei deseja proteger sua capital com o mínimo de tropas possível, considerando um mapa com posições que exigem soldados para defesa e montanhas (inalcançáveis por inimigos).
+- **Objetivo**: Calcular o número mínimo de soldados necessários para impedir que inimigos, vindos de fora do mapa, alcancem a capital. Inimigos só se movem horizontal ou verticalmente.
+- **Premissas**:
+  - Posições com valor `0` são montanhas intransponíveis.
+  - Territórios fora do mapa são fontes potenciais de invasores.
+  - Não há rebeliões internas.
+
+---
+
+### **2. Descrição do Problema**
+- **Entrada**:
+  - Dimensões do mapa: `n` (linhas) e `m` (colunas).
+  - Matriz `n x m` com valores indicando soldados necessários para defender cada posição (`0` para montanhas).
+  - Coordenadas `(x, y)` da capital (baseadas em índices começando em 1 ou 0? O documento não explicita, mas exemplos sugerem base 1).
+- **Restrições**:
+  - `3 ≤ n, m ≤ 300`.
+  - Valores da matriz (`Aij`) podem chegar a `10^4`.
+- **Saída**: Número mínimo de soldados para proteger a capital, garantindo que inimigos não consigam alcançá-la sem passar por posições defendidas.
+
+---
+
+### **3. Solução**
+- **Modelagem com Grafos**:
+  - O mapa deve ser representado como um grafo, onde:
+    - **Vértices**: Posições do mapa (exceto montanhas).
+    - **Arestas**: Conexões entre posições adjacentes (horizontal/vertical).
+  - **Algoritmo Sugerido**: O problema se assemelha a encontrar um "corte mínimo" no grafo que separe a capital dos invasores (posições externas). Isso pode ser resolvido com:
+    - **Fluxo em Redes (Ford-Fulkerson/Dinic)**: Modelando posições como nós e capacidades como soldados necessários.
+    - **Dijkstra Modificado**: Se o problema for interpretado como encontrar caminhos críticos de menor custo.
+
+---
+
+### **Exemplos**
+1. **Exemplo 01**:
+   - Entrada: Mapa `5x7`, capital em `(3,4)`.
+   - Saída: `13` (soldados necessários para bloquear todos os caminhos possíveis).
+2. **Exemplo 02**:
+   - Entrada: Mapa `5x7`, capital em `(3,4)`.
+   - Saída: `9`.
+3. **Exemplo 03**:
+   - Entrada: Mapa `9x4`, capital em `(2,2)`.
+   - Saída: `2`.
+
+---
+
+### **4. Implementação**
+- **Linguagens Permitidas**: C, C++ ou Python, com restrições:
+  - **C/C++**: Bibliotecas padrão (ex.: `<vector>`, `<iostream>`), sem bibliotecas de alto nível (ex.: `<algorithm>`).
+  - **Python**: Versões 3.9+, apenas bibliotecas padrão.
+- **Requisitos**:
+  - Leitura da entrada padrão (ex.: `./tpl < testCase.txt`).
+  - Saída padrão.
+  - **Qualidade do Código**: Boas práticas (nomes descritivos, modularização, comentários objetivos).
+
+---
+
+### **5. Documentação**
+O aluno deve entregar um relatório (máx. 5 páginas) com:
+1. **Introdução**: Explicação do problema.
+2. **Modelagem**: Como o grafo foi construído.
+3. **Solução**: Descrição dos algoritmos (pseudocódigo).
+4. **Análise de Complexidade**: Tempo e espaço dos algoritmos.
+5. **Considerações Finais**: Dificuldades e aprendizados.
+6. **Referências**.
+
+---
+
+### **6. Entrega e Correção**
+- **Formato**: Arquivo compactado (`MATRICULA.NOME.zip`) contendo:
+  - Código-fonte.
+  - Makefile (para C/C++).
+  - Documentação em PDF.
+- **Correção Automática**:
+  - Casos de teste avaliarão corretude e performance.
+  - Penalizações por vazamento de memória ou erros.
+
+---
+
+### **7. Avaliação**
+- **Nota Final (NF)**: Combina:
+  - **FPI (60%)**: Corretude, tempo de execução, qualidade do código.
+  - **FPD (40%)**: Clareza da documentação, modelagem, análise.
+- **Atrasos**: Penalidade exponencial (7 dias zeram a nota).
+
+---
+
+### **8. Considerações Finais**
+- O problema é uma variação do **"Minimum Cut Problem"**, comum em redes de fluxo.
+- Dúvidas devem ser sanadas via fórum ou monitores.
+- Iniciar cedo devido à complexidade da modelagem e implementação.
+
+---
+
+### **Resumo do Problema**
+Encontrar o custo mínimo para bloquear todos os caminhos possíveis (horizontal/vertical) de invasores externos até a capital, usando soldados (valores não-zero) e montanhas (`0`) como barreiras naturais. A solução ótima provavelmente envolve algoritmos de fluxo em redes ou busca em grafos com pesos.

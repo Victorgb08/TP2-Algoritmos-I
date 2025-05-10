@@ -1,0 +1,35 @@
+Parsed Input:
+n=5, m=7, x_cap=3, y_cap=4
+Grid:
+9 1 1 1 9 9 9
+9 0 9 1 1 1 9
+9 0 9 50 9 1 9
+9 1 1 1 9 1 9
+9 9 9 1 9 9 9
+Visiting node (0, 1) with cost 1
+Visiting node (0, 2) with cost 1
+Visiting node (0, 3) with cost 1
+Visiting node (1, 3) with cost 1
+Visiting node (1, 4) with cost 1
+Visiting node (1, 5) with cost 1
+Visiting node (2, 5) with cost 1
+Visiting node (3, 5) with cost 1
+Visiting node (4, 3) with cost 1
+Visiting node (3, 3) with cost 1
+Visiting node (3, 2) with cost 1
+Visiting node (3, 1) with cost 1
+Visiting node (0, 0) with cost 9
+Visiting node (0, 4) with cost 9
+Visiting node (0, 5) with cost 9
+Visiting node (0, 6) with cost 9
+Visiting node (1, 0) with cost 9
+Visiting node (1, 2) with cost 9
+Visiting node (1, 6) with cost 9
+Visiting node (2, 0) with cost 9
+Visiting node (2, 2) with cost 9
+Visiting node (2, 4) with cost 9
+Visiting node (2, 6) with cost 9
+Visiting node (3, 0) with cost 9
+Visiting node (3, 4) with cost 9
+Reached capital at (3, 4) with total cost 129
+Final total cost: 129

@@ -1,0 +1,228 @@
+\documentclass[a4paper,12pt]{article}
+
+% Pacotes necessários
+\usepackage[utf8]{inputenc} % Codificação UTF-8
+\usepackage[T1]{fontenc}    % Suporte para caracteres acentuados
+\usepackage[portuguese]{babel} % Idioma português
+\usepackage{geometry}       % Configuração de margens
+\usepackage{hyperref}       % Links clicáveis no documento
+\usepackage{amsmath}        % Pacote para fórmulas matemáticas
+
+% Configuração de margens
+\geometry{a4paper, margin=2.5cm}
+
+\begin{document}
+
+% Título e informações do autor
+\begin{center}
+    \Large\textbf{Documentação do Trabalho Prático 2} \\
+    \large Algoritmos I - 2025/1 \\[1em]
+    Victor Guedes Batista \\ Matrícula: 2020070817 \\[1em]
+    \today
+\end{center}
+
+% Capítulo 1: Introdução
+\section*{Introdução}
+
+Este documento apresenta a solução para o \textbf{Trabalho Prático 2} da disciplina de Algoritmos I, cujo objetivo é determinar o número mínimo de soldados necessários para proteger a capital de um reino fictício contra invasores.
+
+O problema é modelado como um grafo, onde cada célula do mapa representa um custo de defesa. A solução utiliza algoritmos de fluxo máximo para calcular o corte mínimo que isola a capital do restante do mapa.
+
+Os capítulos seguintes detalham a modelagem, a solução implementada, a análise de complexidade e as considerações finais.
+
+% Capítulo 2: Modelagem
+\section*{Modelagem}
+
+O problema foi modelado como um grafo direcionado, onde cada célula do mapa é representada por dois nós: \textit{vin} (entrada) e \textit{vout} (saída). Essa separação permite definir capacidades específicas para cada célula e suas conexões.
+
+\subsection*{Representação do Grafo}
+
+\begin{itemize}
+    \item Cada célula é conectada de \textit{vin} para \textit{vout} com capacidade igual ao custo de defesa.
+    \item Células vizinhas são conectadas de \textit{vout} para \textit{vin} com capacidade infinita.
+    \item Um nó \textit{source} conecta as bordas do mapa (exceto montanhas) com capacidade infinita.
+    \item O nó \textit{vout} da capital é conectado ao \textit{sink} com capacidade infinita.
+\end{itemize}
+
+\subsection*{Estrutura de Dados}
+
+O grafo foi representado por uma matriz de adjacência com $2 \times (n \times m) + 2$ nós, onde $n$ e $m$ são as dimensões do mapa. Os índices dos nós foram calculados como:
+\begin{itemize}
+    \item \textit{vin}: $2 \times (i \times m + j)$
+    \item \textit{vout}: $2 \times (i \times m + j) + 1$
+\end{itemize}
+
+\subsection*{Algoritmos Utilizados}
+
+Para resolver o problema, foi utilizado o algoritmo de \textbf{Edmonds-Karp},
+uma implementação do algoritmo de fluxo máximo de Ford-Fulkerson baseada em
+busca em largura (BFS). A seguir, descrevemos os principais passos do
+algoritmo:
+
+\begin{enumerate}
+    \item Inicializar o grafo residual com as capacidades fornecidas.
+    \item Enquanto houver um caminho aumentador da \textit{source} para o \textit{sink}
+          no grafo residual:
+          \begin{enumerate}
+              \item Encontrar o caminho aumentador utilizando BFS.
+              \item Determinar a capacidade de gargalo do caminho.
+              \item Atualizar as capacidades residuais ao longo do caminho.
+          \end{enumerate}
+    \item O fluxo máximo é a soma das capacidades de todos os caminhos aumentadores
+          encontrados.
+\end{enumerate}
+
+\subsection*{Tradução do Problema}
+
+A tradução do problema para o grafo pode ser resumida nos seguintes passos:
+\begin{enumerate}
+    \item Cada célula do mapa é transformada em dois nós (\textit{vin} e \textit{vout}).
+    \item As conexões entre células vizinhas são representadas por arestas com capacidade
+          infinita.
+    \item As células nas bordas do mapa são conectadas à \textit{source}.
+    \item A célula da capital é conectada ao \textit{sink}.
+\end{enumerate}
+
+Essa modelagem permite que o problema seja resolvido como um problema de fluxo
+máximo, onde o corte mínimo no grafo corresponde ao número mínimo de soldados
+necessários para proteger a capital.
+
+% Capítulo 3: Solução
+\section*{Solução}
+
+A solução utiliza o algoritmo de \textbf{Edmonds-Karp} para calcular o fluxo máximo no grafo modelado. O fluxo máximo corresponde ao custo do corte mínimo, que é o número mínimo de soldados necessários para proteger a capital.
+
+\subsection*{Passos da Solução}
+
+\begin{enumerate}
+    \item \textbf{Construção do Grafo}: Cada célula é representada por dois nós (\textit{vin} e \textit{vout}), conectados com base nas regras do problema.
+    \item \textbf{Cálculo do Fluxo Máximo}: O algoritmo de Edmonds-Karp encontra caminhos aumentadores no grafo residual e atualiza as capacidades.
+    \item \textbf{Interpretação do Resultado}: O valor do fluxo máximo é o custo do corte mínimo.
+\end{enumerate}
+
+A implementação foi realizada em Python, utilizando uma matriz de adjacência para representar o grafo e BFS para encontrar caminhos aumentadores.
+
+\subsection*{Pseudocódigo do Algoritmo}
+
+A seguir, apresentamos o pseudocódigo do algoritmo de Edmonds-Karp utilizado na
+solução:
+
+\begin{verbatim}
+EdmondsKarp(G, source, sink):
+    Inicializar fluxo máximo como 0
+    Enquanto houver um caminho aumentador no grafo residual:
+        Encontrar o caminho aumentador usando BFS
+        Determinar a capacidade de gargalo do caminho
+        Atualizar as capacidades residuais ao longo do caminho
+        Adicionar a capacidade de gargalo ao fluxo máximo
+    Retornar o fluxo máximo
+\end{verbatim}
+
+\subsection*{Detalhes da Implementação}
+
+A implementação foi realizada em Python e segue os seguintes passos:
+
+\begin{itemize}
+    \item A função \texttt{parse\_input\_corrected} lê os dados de entrada e converte as
+          coordenadas da capital para índices baseados em zero.
+    \item A matriz de adjacência \texttt{capacity\_adj\_matrix} é construída para
+          representar o grafo, com base na modelagem descrita no capítulo anterior.
+    \item A função \texttt{edmonds\_karp\_max\_flow} calcula o fluxo máximo entre o
+          \textit{source} e o \textit{sink}, utilizando BFS para encontrar caminhos
+          aumentadores.
+    \item A função \texttt{solve} integra todas as etapas, retornando o número mínimo de
+          soldados necessários para proteger a capital.
+\end{itemize}
+
+Essa abordagem garante que o problema seja resolvido de forma eficiente e
+correta, utilizando conceitos sólidos de teoria dos grafos.
+
+% Capítulo 4: Análise de Complexidade
+\section*{Análise de Complexidade}
+
+Neste capítulo, analisamos a complexidade assintótica de tempo e memória da
+solução implementada para o problema proposto. A análise considera as três
+etapas principais da solução: construção do grafo, execução do algoritmo de
+Edmonds-Karp e interpretação do resultado.
+
+\subsection*{Construção do Grafo}
+
+A construção do grafo envolve a criação de uma matriz de adjacência para
+representar as capacidades entre os nós. Cada célula do mapa é representada por
+dois nós (\textit{vin} e \textit{vout}), e as conexões entre células vizinhas
+são adicionadas com base nas regras do problema.
+
+\begin{itemize}
+    \item \textbf{Tempo}: Para cada célula do mapa, verificamos seus vizinhos (até 4 vizinhos por célula). Assim, o tempo necessário para construir o grafo é proporcional ao número de células no mapa, ou seja, $O(n \times m)$, onde $n$ é o número de linhas e $m$ é o número de colunas.
+    \item \textbf{Memória}: A matriz de adjacência possui $2 \times (n \times m) + 2$ nós, resultando em um espaço de $O((n \times m)^2)$ para armazenar as capacidades.
+\end{itemize}
+
+\subsection*{Execução do Algoritmo de Edmonds-Karp}
+
+O algoritmo de Edmonds-Karp é uma implementação do algoritmo de Ford-Fulkerson
+que utiliza busca em largura (BFS) para encontrar caminhos aumentadores no
+grafo residual.
+
+\begin{itemize}
+    \item \textbf{Tempo}: O algoritmo realiza até $O(E)$ iterações de BFS, onde $E$ é o número de arestas no grafo. Cada BFS percorre no máximo $O(V)$ nós, onde $V$ é o número de nós no grafo. Assim, a complexidade total do algoritmo é $O(V \times E^2)$. No caso do grafo construído, temos $V = 2 \times (n \times m) + 2$ e $E = O(n \times m)$, resultando em uma complexidade de $O((n \times m)^3)$.
+    \item \textbf{Memória}: O grafo residual é armazenado como uma matriz de adjacência, ocupando $O((n \times m)^2)$ de espaço.
+\end{itemize}
+
+\subsection*{Interpretação do Resultado}
+
+A interpretação do resultado consiste em retornar o valor do fluxo máximo
+calculado pelo algoritmo de Edmonds-Karp. Essa etapa é constante em termos de
+tempo e memória.
+
+\begin{itemize}
+    \item \textbf{Tempo}: $O(1)$.
+    \item \textbf{Memória}: $O(1)$.
+\end{itemize}
+
+\subsection*{Complexidade Total}
+
+A complexidade total da solução é dominada pela execução do algoritmo de
+Edmonds-Karp, que possui complexidade de tempo $O((n \times m)^3)$ e
+complexidade de memória $O((n \times m)^2)$. Assim, temos:
+
+\begin{itemize}
+    \item \textbf{Tempo Total}: $O((n \times m)^3)$.
+    \item \textbf{Memória Total}: $O((n \times m)^2)$.
+\end{itemize}
+
+\subsection*{Discussão}
+
+Embora a solução seja eficiente para mapas de tamanho moderado, a complexidade
+cúbica em relação ao número de células do mapa pode se tornar um gargalo para
+mapas muito grandes. No entanto, a escolha do algoritmo de Edmonds-Karp foi
+adequada para o problema, pois garante a correção e permite uma implementação
+relativamente simples, atendendo aos requisitos do trabalho prático.
+
+% Capítulo 5: Considerações Finais
+\section*{Considerações Finais}
+
+Este trabalho foi uma experiência desafiadora e enriquecedora, permitindo aplicar conceitos de grafos e algoritmos de fluxo máximo.
+
+\subsection*{Partes Mais Fáceis}
+A leitura do problema e a implementação da estrutura de dados foram diretas, graças à clareza dos requisitos e à modelagem bem definida.
+
+\subsection*{Partes Mais Difíceis}
+A modelagem do grafo e a depuração de erros foram desafiadoras, especialmente para casos de teste complexos. A análise de complexidade também exigiu atenção aos detalhes.
+
+Apesar dos desafios, o trabalho proporcionou um aprendizado significativo e reforçou a importância de uma abordagem sistemática para resolver problemas computacionais.
+
+% Capítulo 6: Referências
+\section*{Referências}
+
+As seguintes referências foram utilizadas para o desenvolvimento deste
+trabalho:
+
+\begin{itemize}
+    \item Slides da disciplina Algoritmos I, disponível no Moodle.
+    \item Documentação oficial do Python (\url{https://docs.python.org/3/}).
+\end{itemize}
+
+Essas fontes foram fundamentais para compreender os conceitos teóricos e
+implementar a solução de forma eficiente e correta.
+
+\end{document}
