@@ -46,10 +46,10 @@ O problema foi modelado como um grafo direcionado, onde cada célula do mapa é 
 
 \subsection*{Estrutura de Dados}
 
-O grafo foi representado por uma matriz de adjacência com $2 \times (n \times m) + 2$ nós, onde $n$ e $m$ são as dimensões do mapa. Os índices dos nós foram calculados como:
+O grafo foi representado por uma lista de adjacência, onde cada nó armazena apenas as arestas conectadas a ele e suas respectivas capacidades. Essa abordagem reduz o uso de memória, especialmente para grafos esparsos. Os índices dos nós foram calculados como:
 \begin{itemize}
-    \item \textit{vin}: $2 \times (i \times m + j)$
-    \item \textit{vout}: $2 \times (i \times m + j) + 1$
+    \item Cada célula do mapa é representada por um nó único.
+    \item As conexões entre células vizinhas são representadas por arestas com capacidade infinita.
 \end{itemize}
 
 \subsection*{Algoritmos Utilizados}
@@ -95,7 +95,7 @@ A solução utiliza o algoritmo de \textbf{Edmonds-Karp} para calcular o fluxo m
 \subsection*{Passos da Solução}
 
 \begin{enumerate}
-    \item \textbf{Construção do Grafo}: Cada célula é representada por dois nós (\textit{vin} e \textit{vout}), conectados com base nas regras do problema.
+    \item \textbf{Construção do Grafo}: Cada célula válida (com custo maior que 0) é representada por um nó. As conexões entre células vizinhas são adicionadas com capacidade infinita, e as bordas do mapa são conectadas ao nó \textit{source}. A célula da capital é conectada ao nó \textit{sink}.
     \item \textbf{Cálculo do Fluxo Máximo}: O algoritmo de Edmonds-Karp encontra caminhos aumentadores no grafo residual e atualiza as capacidades.
     \item \textbf{Interpretação do Resultado}: O valor do fluxo máximo é o custo do corte mínimo.
 \end{enumerate}
@@ -147,25 +147,20 @@ Edmonds-Karp e interpretação do resultado.
 
 \subsection*{Construção do Grafo}
 
-A construção do grafo envolve a criação de uma matriz de adjacência para
-representar as capacidades entre os nós. Cada célula do mapa é representada por
-dois nós (\textit{vin} e \textit{vout}), e as conexões entre células vizinhas
-são adicionadas com base nas regras do problema.
+A construção do grafo envolve a criação de uma lista de adjacência para representar as capacidades entre os nós. Cada célula válida (com custo maior que 0) é representada por um nó, e as conexões entre células vizinhas são adicionadas com base nas regras do problema.
 
 \begin{itemize}
-    \item \textbf{Tempo}: Para cada célula do mapa, verificamos seus vizinhos (até 4 vizinhos por célula). Assim, o tempo necessário para construir o grafo é proporcional ao número de células no mapa, ou seja, $O(n \times m)$, onde $n$ é o número de linhas e $m$ é o número de colunas.
-    \item \textbf{Memória}: A matriz de adjacência possui $2 \times (n \times m) + 2$ nós, resultando em um espaço de $O((n \times m)^2)$ para armazenar as capacidades.
+    \item \textbf{Tempo}: Para cada célula válida, verificamos seus vizinhos (até 4 vizinhos por célula). Assim, o tempo necessário para construir o grafo é proporcional ao número de células válidas no mapa, ou seja, $O(n \times m)$, onde $n$ é o número de linhas e $m$ é o número de colunas.
+    \item \textbf{Memória}: A lista de adjacência armazena apenas as arestas existentes, resultando em um espaço de $O(V + E)$, onde $V$ é o número de nós e $E$ é o número de arestas. Isso é significativamente menor do que o $O(V^2)$ necessário para uma matriz de adjacência.
 \end{itemize}
 
 \subsection*{Execução do Algoritmo de Edmonds-Karp}
 
-O algoritmo de Edmonds-Karp é uma implementação do algoritmo de Ford-Fulkerson
-que utiliza busca em largura (BFS) para encontrar caminhos aumentadores no
-grafo residual.
+O algoritmo de Edmonds-Karp utiliza busca em largura (BFS) para encontrar caminhos aumentadores no grafo residual.
 
 \begin{itemize}
-    \item \textbf{Tempo}: O algoritmo realiza até $O(E)$ iterações de BFS, onde $E$ é o número de arestas no grafo. Cada BFS percorre no máximo $O(V)$ nós, onde $V$ é o número de nós no grafo. Assim, a complexidade total do algoritmo é $O(V \times E^2)$. No caso do grafo construído, temos $V = 2 \times (n \times m) + 2$ e $E = O(n \times m)$, resultando em uma complexidade de $O((n \times m)^3)$.
-    \item \textbf{Memória}: O grafo residual é armazenado como uma matriz de adjacência, ocupando $O((n \times m)^2)$ de espaço.
+    \item \textbf{Tempo}: O algoritmo realiza até $O(E)$ iterações de BFS, onde $E$ é o número de arestas no grafo. Cada BFS percorre no máximo $O(V)$ nós, onde $V$ é o número de nós no grafo. Assim, a complexidade total do algoritmo é $O(V \times E^2)$.
+    \item \textbf{Memória}: O grafo residual é armazenado como uma lista de adjacência, ocupando $O(V + E)$ de espaço. Isso é mais eficiente do que o $O(V^2)$ necessário para uma matriz de adjacência.
 \end{itemize}
 
 \subsection*{Interpretação do Resultado}
@@ -181,13 +176,11 @@ tempo e memória.
 
 \subsection*{Complexidade Total}
 
-A complexidade total da solução é dominada pela execução do algoritmo de
-Edmonds-Karp, que possui complexidade de tempo $O((n \times m)^3)$ e
-complexidade de memória $O((n \times m)^2)$. Assim, temos:
+A complexidade total da solução é dominada pela execução do algoritmo de Edmonds-Karp, que possui:
 
 \begin{itemize}
-    \item \textbf{Tempo Total}: $O((n \times m)^3)$.
-    \item \textbf{Memória Total}: $O((n \times m)^2)$.
+    \item \textbf{Tempo Total}: $O((n \times m)^3)$, considerando que o número de nós \(V\) e o número de arestas \(E\) são proporcionais ao tamanho do mapa.
+    \item \textbf{Memória Total}: $O(V + E)$, devido ao uso de uma lista de adjacência para representar o grafo. Isso é significativamente mais eficiente do que o $O((n \times m)^2)$ necessário para uma matriz de adjacência.
 \end{itemize}
 
 \subsection*{Discussão}
@@ -207,9 +200,10 @@ Este trabalho foi uma experiência desafiadora e enriquecedora, permitindo aplic
 A leitura do problema e a implementação da estrutura de dados foram diretas, graças à clareza dos requisitos e à modelagem bem definida.
 
 \subsection*{Partes Mais Difíceis}
-A modelagem do grafo e a depuração de erros foram desafiadoras, especialmente para casos de teste complexos. A análise de complexidade também exigiu atenção aos detalhes.
+A modelagem do grafo foi desafiadora, especialmente ao otimizar o uso de memória. A substituição da matriz de adjacência por uma lista de adjacência foi uma decisão importante para reduzir o consumo de memória e melhorar a eficiência, mas exigiu ajustes na implementação.
 
-Apesar dos desafios, o trabalho proporcionou um aprendizado significativo e reforçou a importância de uma abordagem sistemática para resolver problemas computacionais.
+\subsection*{Aprendizados}
+A otimização do código para lidar com limitações de memória foi um aprendizado significativo. A transição para uma lista de adjacência demonstrou a importância de escolher estruturas de dados adequadas para problemas específicos.
 
 % Capítulo 6: Referências
 \section*{Referências}
